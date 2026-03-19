@@ -1,10 +1,10 @@
 public class BattleshipGame {
-    private GameBoard board;
+    private Gameboard board;
     private StatisticsTracker stats;
     private GUI gui;
 
     public BattleshipGame() {
-        board = new GameBoard();
+        board = new Gameboard();
         stats = new StatisticsTracker();
         gui = new GUI(this, board, stats);
     }

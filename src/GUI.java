@@ -5,10 +5,10 @@ public class GUI extends JFrame {
     private JButton[][] buttons;
     private JLabel missLabel, strikeLabel, totalMissLabel, totalHitLabel;
 
-    private GameBoard board;
+    private Gameboard board;
     private StatisticsTracker stats;
 
-    public GUI(BattleshipGame game, GameBoard board, StatisticsTracker stats) {
+    public GUI(BattleshipGame game, Gameboard board, StatisticsTracker stats) {
         this.board = board;
         this.stats = stats;
 
