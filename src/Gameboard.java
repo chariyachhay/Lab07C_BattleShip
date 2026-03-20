@@ -29,7 +29,7 @@ public class Gameboard {
     }
 
     private void placeShips() {
-        int[] sizes = {5,4,3,3,2};
+        int[] sizes = {5, 4, 3, 3, 2};
         Random rand = new Random();
 
         for (int size : sizes) {

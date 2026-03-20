@@ -6,13 +6,7 @@ public class BattleshipGame {
     public BattleshipGame() {
         board = new Gameboard();
         stats = new StatisticsTracker();
-        gui = new GUI(this, board, stats);
-    }
-
-    public void startNewGame() {
-        board.resetBoard();
-        stats.reset();
-        gui.refreshBoard();
+        gui = new GUI(board, stats);
     }
 
     public static void main(String[] args) {

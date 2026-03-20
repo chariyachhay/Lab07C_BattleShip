@@ -4,6 +4,10 @@ public class StatisticsTracker {
     private int totalMiss;
     private int totalHit;
 
+    public StatisticsTracker() {
+        reset();
+    }
+
     public void reset() {
         miss = 0;
         strikes = 0;
