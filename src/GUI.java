@@ -15,10 +15,13 @@ public class GUI extends JFrame {
         this.stats = stats;
 
         setTitle("Battleship Game");
-        setSize(600, 650);
+        setSize(600, 700);
         setLayout(new BorderLayout());
 
-        // TOP PANEL (buttons)
+        JLabel title = new JLabel("Battleship Game", SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        add(title, BorderLayout.NORTH);
+
         JPanel topPanel = new JPanel();
 
         JButton playAgainBtn = new JButton("Play Again");
@@ -37,26 +40,31 @@ public class GUI extends JFrame {
 
         quitBtn.addActionListener(e -> {
             int choice = JOptionPane.showConfirmDialog(this,
-                    "Quit Game?",
+                    "Do you want to play again?",
                     "Quit",
                     JOptionPane.YES_NO_OPTION);
 
             if (choice == JOptionPane.YES_OPTION) {
+                resetGame();
+            } else {
                 System.exit(0);
             }
         });
 
         topPanel.add(playAgainBtn);
         topPanel.add(quitBtn);
-        add(topPanel, BorderLayout.NORTH);
 
-        // GRID
+        add(topPanel, BorderLayout.BEFORE_FIRST_LINE);
+
         JPanel gridPanel = new JPanel(new GridLayout(10, 10));
         buttons = new JButton[10][10];
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 JButton btn = new JButton("~");
+                btn.setBackground(Color.CYAN);
+                btn.setOpaque(true);
+
                 int r = i;
                 int c = j;
 
@@ -68,7 +76,6 @@ public class GUI extends JFrame {
 
         add(gridPanel, BorderLayout.CENTER);
 
-        // STATS PANEL
         JPanel statsPanel = new JPanel();
 
         missLabel = new JLabel("Miss: 0");
@@ -110,6 +117,7 @@ public class GUI extends JFrame {
 
             if (stats.getTotalHit() == 17) {
                 gameOver = true;
+                disableAllButtons();
 
                 int choice = JOptionPane.showConfirmDialog(this,
                         "You Win! Play Again?",
@@ -118,6 +126,8 @@ public class GUI extends JFrame {
 
                 if (choice == JOptionPane.YES_OPTION) {
                     resetGame();
+                } else {
+                    System.exit(0);
                 }
             }
 
@@ -129,6 +139,7 @@ public class GUI extends JFrame {
 
             if (stats.getStrikes() == 3) {
                 gameOver = true;
+                disableAllButtons();
 
                 int choice = JOptionPane.showConfirmDialog(this,
                         "You Lost! Play Again?",
@@ -137,11 +148,21 @@ public class GUI extends JFrame {
 
                 if (choice == JOptionPane.YES_OPTION) {
                     resetGame();
+                } else {
+                    System.exit(0);
                 }
             }
         }
 
         updateLabels();
+    }
+
+    private void disableAllButtons() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                buttons[i][j].setEnabled(false);
+            }
+        }
     }
 
     private void updateLabels() {
@@ -160,7 +181,8 @@ public class GUI extends JFrame {
             for (int j = 0; j < 10; j++) {
                 buttons[i][j].setText("~");
                 buttons[i][j].setEnabled(true);
-                buttons[i][j].setBackground(null);
+                buttons[i][j].setBackground(Color.CYAN);
+                buttons[i][j].setOpaque(true);
             }
         }
 
